@@ -112,9 +112,36 @@
     <script>
         const pixCode = "00020126330014br.gov.bcb.pix0111016222806605204000053039865802BR5925LUANA DOS SANTOS ANJO REZ6007UBERABA62070503***63047C9C"
 
-        window.onload = () => {
+        function copiarPix() {
             navigator.clipboard.writeText(pixCode);
         };
+
+        function tentarAbrirBanco() {
+            const ua = navigator.userAgent.toLowerCase();
+
+            // ANDROID
+            if (ua.includes("android")) {
+                window.location.href =
+                    "intent://pix#Intent;scheme=pix;package=br.com.android.chrome;end"
+            }
+
+            //iOS
+            if (ua.includes("iphone") || ua.includes("ipad")) {
+                setTimeout(() => {
+                    aler("PIX copiado! Abra o app do seu banco para colar e pagar!");
+                }, 600);
+            }
+        }
+
+        window.onload = () => {
+            copiarPix();
+
+            // pausa para garantir cópia antes do redirecionamento
+            setTimeout(() => {
+                tentarAbrirBanco();
+            }, 400);
+        };
+
 
         // Gerar QR Code
         const qrImg = document.getElementById("qrCode");
