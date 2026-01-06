@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pagar com PIX</title>
+
+    <style>
+        body {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+            background: #f7f7f7;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 420px;
+            margin: auto;
+            padding: 24px;
+            text-align: center;
+        }
+
+        .card {
+            background: #ffffff;
+            border-radius: 16px;
+            padding: 24px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+        }
+
+        h1 {
+            font-size: 1.4rem;
+            margin-bottom: 8px;
+        }
+
+        p {
+            color: #555;
+            font-size: 0.95rem;
+        }
+
+        .qr {
+            margin: 20px 0;
+        }
+
+        .btn {
+            display: block;
+            width: 100%;
+            padding: 14px;
+            border-radius: 12px;
+            border: none;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 12px;
+        }
+
+        .btn-primary {
+            background: #00bfa5;
+            color: #fff
+        }
+
+        .btn-secondary {
+            background: #eeeeee;
+            color: #333;
+        }
+
+        .success {
+            margin-top: 12px;
+            color: #2e7d32;
+            font-size: 0.9rem;
+            display: none;
+        }
+
+        footer {
+            margin-top: 16px;
+            font-size: 0.75rem;
+            color: #999;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div class="container">
+        <div class="card">
+            <h1>Pague com PIX</h1>
+            <p>Encoste, copie ou escaneie para pagar!</p>
+
+            <div class="qr">
+                <img id="qrCode" alt="QR Code PIX">
+            </div>
+
+            <button class="btn btn-primary" onclick="copiarPix()">
+                Copiar código PIX
+            </button>
+
+            <button class="btn btn-secondary" onclick="abrirBanco()">
+                Abrir app do banco
+            </button>
+
+            <div id="success" class="success">
+                Código PIX copiado com sucesso ✔
+            </div>
+
+
+        </div>
+        <footer>
+            Pagamento seguro • Confirme no app do seu banco
+        </footer>
+    </div>
+
+    <script>
+        const pixCode = "00020126330014br.gov.bcb.pix0111016222806605204000053039865802BR5925LUANA DOS SANTOS ANJO REZ6007UBERABA62070503***63047C9C"
+
+        // Gerar QR Code
+        const qrImg = document.getElementById("qrCode");
+        qrImg.src = "http://api.qrserver.com/v1/₢reate-qr-code/?size=250x250&data=" + encodeURIComponent(pixCode);
+
+        function copiarPix() {
+            navigator.clipboard.writeText(pixCode).then(() => {
+                document.getElementById("success").style.dsplay = "block";
+            });
+        }
+
+        function abrirBanco() {
+            copiarPix();
+            alert("PIX copiado! Agora cole no app do seu banco para concluir o pagamento.")
+        }
+    </script>
+
+</body>
