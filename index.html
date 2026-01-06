@@ -112,22 +112,25 @@
     <script>
         const pixCode = "00020126330014br.gov.bcb.pix0111016222806605204000053039865802BR5925LUANA DOS SANTOS ANJO REZ6007UBERABA62070503***63047C9C"
 
+        window.onload = () => {
+            navigator.clipboard.writeText(pixCode);
+        };
+
         // Gerar QR Code
-    const qrImg = document.getElementById("qrCode");
-    qrImg.src = "https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=" 
-                + encodeURIComponent(pixCode);
+        const qrImg = document.getElementById("qrCode");
+        qrImg.src = "https://api.qrserver.com/v1/create-qr-code/?size=250x250&data="
+            + encodeURIComponent(pixCode);
 
-    function copiarPix() {
-      navigator.clipboard.writeText(pixCode).then(() => {
-        document.getElementById("success").style.display = "block";
-      });
-    }
+        function copiarPix() {
+            navigator.clipboard.writeText(pixCode).then(() => {
+                document.getElementById("success").style.display = "block";
+            });
+        }
 
-    function abrirBanco() {
-      copiarPix();
-      alert("PIX copiado! Agora cole no app do seu banco para concluir o pagamento.");
-    }
+        function abrirBanco() {
+            copiarPix();
+            alert("PIX copiado! Agora cole no app do seu banco para concluir o pagamento.");
+        }
     </script>
-
 
 </body>
